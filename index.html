@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Newport Fugitives 1st XI Stat Centre</title>
+<style>
+:root{--navy:#081f3a;--sky:#58afe0;--bg:#eef4f8;--ink:#13263d;--muted:#65758a;--line:#d8e3ec}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--navy),#123c63);color:#fff;padding:20px 18px 42px}
+.wrap{max-width:1180px;margin:auto}.brand{display:flex;gap:16px;align-items:center}.brand img{width:88px;height:88px;object-fit:contain;background:#fff;border-radius:16px;padding:6px}
+h1{margin:0;font-size:clamp(28px,5vw,48px);line-height:1}.sub{color:#d7eaf5;margin:7px 0 0}.search{margin-top:22px;display:flex;max-width:680px;background:#fff;border-radius:13px;padding:6px}
+.search input{flex:1;border:0;outline:0;padding:12px}.search button{border:0;background:var(--sky);color:var(--navy);font-weight:800;border-radius:9px;padding:0 18px}
+main{max-width:1180px;margin:-20px auto 50px;padding:0 18px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card,.box{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 7px 22px rgba(8,31,58,.07)}
+.card strong{display:block;font-size:27px;color:var(--navy)}.card span{font-size:11px;text-transform:uppercase;color:var(--muted);font-weight:800}
+nav{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px;display:flex;gap:7px;flex-wrap:wrap}
+nav button{border:0;background:#edf3f7;padding:9px 12px;border-radius:9px;font-weight:800}nav button.active{background:var(--navy);color:#fff}
+.status,.disclaimer{margin-top:15px;background:#e7f6fd;border-left:4px solid var(--sky);padding:11px 13px;border-radius:9px;font-size:13px}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:25px 2px 10px}.section-head h2{margin:0;color:var(--navy)}
+.records,.xi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.record,.xi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
+.record small,.xi-role{color:var(--muted);font-weight:700}.record b{display:block;font-size:19px;color:var(--navy);margin-top:6px}.record strong{display:block;font-size:28px;color:#278fc7}
+.table-wrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto}table{width:100%;border-collapse:collapse;min-width:820px}
+th{background:#f0f5f8;color:#475569;padding:11px;text-align:right;font-size:11px;text-transform:uppercase}th:first-child,td:first-child{text-align:left}
+td{padding:11px;border-top:1px solid #edf1f5;text-align:right}tbody tr{cursor:pointer}tbody tr:hover{background:#f3fbff}
+.rank{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#e9f1f6;margin-right:8px;font-weight:800}.name{font-weight:800;color:var(--navy)}
+.meta{display:block;margin-left:38px;color:var(--muted);font-size:11px}.hidden{display:none!important}
+.xi-card h3{margin:0;color:var(--navy)}.xi-role{margin:4px 0 10px}.xi-note{font-size:12px;line-height:1.45;margin-top:8px}
+.team-block{margin-bottom:26px}.team-heading{display:flex;justify-content:space-between;align-items:end;margin:20px 2px 10px}
+.team-heading h3{margin:0;color:var(--navy);font-size:22px}.team-heading small{color:var(--muted)}
+.team-summary{margin-top:10px;background:#f5f9fc;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:12px;color:#4b5f73}
+.milestone-section{margin-bottom:22px}.milestone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.milestone-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
+.milestone-card h3{margin:0;color:var(--navy);font-size:19px}.milestone-count{color:#278fc7;font-weight:800;margin:4px 0 10px}
+.milestone-list{display:flex;flex-wrap:wrap;gap:7px}.milestone-player{border:0;background:#edf6fb;color:var(--navy);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
+.milestone-player:hover{background:var(--sky)}
+.near-milestone{background:#fff3b8;border:1px solid #e5c54a;border-radius:14px;padding:14px;margin-top:14px}
+.near-milestone h3{margin:0 0 8px;color:var(--navy)}
+.near-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.near-card{background:#fff9d9;border:1px solid #e8cf66;border-radius:11px;padding:10px}
+.near-card b{display:block;color:var(--navy)}
+.near-card span{font-size:12px;color:#6b5a17}
+.modal{display:none;position:fixed;inset:0;background:rgba(3,15,28,.76);z-index:20;padding:18px;overflow:auto}.modal.open{display:grid;place-items:center}
+.modal-card{width:min(760px,100%);background:#fff;border-radius:18px;overflow:hidden}.modal-head{background:var(--navy);color:#fff;padding:22px;display:flex;justify-content:space-between}
+.modal-head h2{margin:0}.close{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:50%;width:38px;height:38px;font-size:22px}
+.modal-body{padding:20px}.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.panel{border:1px solid var(--line);border-radius:13px;padding:14px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#f5f8fb;border-radius:9px;padding:9px}.stat b{display:block;font-size:18px;color:var(--navy)}.stat span{font-size:10px;text-transform:uppercase;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 15px 28px}
+@media(max-width:900px){.profile-grid{grid-template-columns:1fr}}@media(max-width:760px){.cards{grid-template-columns:1fr 1fr}.records,.xi-grid,.milestone-grid,.near-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand"><img src="fugitives-logo.png" alt="Newport Fugitives logo"><div><h1>Newport Fugitives<br>1st XI Stat Centre</h1><p class="sub">Live career records from 1990 to the present day</p></div></div>
+<div class="search"><input id="search" placeholder="Search by player, number or debut year"><button onclick="render()">Search</button></div>
+</div></header>
+
+<main>
+<section class="cards">
+<div class="card"><strong id="pc">—</strong><span>Players</span></div>
+<div class="card"><strong id="mc">—</strong><span>Appearances</span></div>
+<div class="card"><strong id="rc">—</strong><span>Runs</span></div>
+<div class="card"><strong id="wc">—</strong><span>Wickets</span></div>
+</section>
+
+<nav>
+<button class="active" data-view="players">Players</button>
+<button data-view="batting">Batting</button>
+<button data-view="bowling">Bowling</button>
+<button data-view="fielding">Fielding</button>
+<button data-view="numbers">Player Numbers</button>
+<button data-view="appearances">Appearances</button>
+<button data-view="milestones">Milestone Clubs</button>
+<button data-view="xi">AI Greatest Teams</button>
+</nav>
+
+<div class="status" id="status">Loading live Google Sheets data…</div>
+
+<section id="standard">
+<div id="records" class="hidden"><div class="section-head"><h2>Club Records</h2><small>Calculated from live data</small></div><div class="records" id="recordCards"></div></div>
+<div class="section-head"><h2 id="title">Player Directory</h2><small id="count"></small></div>
+<div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+</section>
+
+<section id="milestones" class="hidden">
+<div class="section-head"><h2>Milestone Clubs</h2><small>Automatically updated from the live career statistics</small></div>
+<div class="box" style="margin-bottom:12px">Each player appears only in the highest milestone club they have reached. Players who are close to their next landmark are highlighted in yellow below.</div>
+<div class="milestone-section"><div class="section-head"><h2 style="font-size:22px">Batting Milestones</h2><small>Every 500 career runs</small></div><div class="milestone-grid" id="batMilestones"></div></div>
+<div class="milestone-section"><div class="section-head"><h2 style="font-size:22px">Bowling Milestones</h2><small>Every 25 career wickets</small></div><div class="milestone-grid" id="bowlMilestones"></div></div>
+<div class="milestone-section"><div class="section-head"><h2 style="font-size:22px">Catching Milestones</h2><small>Career catches</small></div><div class="milestone-grid" id="catchMilestones"></div></div>
+<div class="near-milestone"><h3>Players approaching their next milestone</h3><div class="near-grid" id="nearMilestones"></div></div>
+</section>
+
+<section id="xi" class="hidden">
+<div class="section-head"><h2>AI Greatest Teams</h2><small>Three XIs selected using career averages and wicketkeeping dismissals</small></div>
+<div class="box" style="margin-bottom:12px"><strong>AI-generated selections:</strong> Each XI contains one recognised full-time wicketkeeper, five batters and five bowlers. Batters are selected primarily by batting average, bowlers by the lowest bowling average, and wicketkeepers by fielding dismissals per match (catches plus stumpings). Minimum career qualifications are applied to reduce the effect of very small samples. No player can appear in more than one team.</div>
+<div id="teamsContainer"></div>
+</section>
+
+<div class="disclaimer"><strong>Historical records disclaimer:</strong> Career statistics are complete from the 1990 season onwards. Players with playing numbers below 30 may have had substantial Newport Fugitives careers before 1990, so their displayed totals represent only the recorded post-1990 portion of their careers.</div>
+</main>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeProfile()"><div class="modal-card">
+<div class="modal-head"><div><h2 id="pname"></h2><div id="ptags"></div></div><button class="close" onclick="closeProfile()">×</button></div>
+<div class="modal-body" id="pbody"></div>
+</div></div>
+
+<footer>Newport Fugitives Cricket Club · 1st XI statistics from Google Sheets</footer>
+
+<script>
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTH0mxm65m-RPZTPj2DFojsQ8x5KxuzivANthibfnwkfdcbsx2WDziP3n3vaZzmfdkaCWCbTtuwk-IS/pub?gid=0&single=true&output=csv";
+const KEEPER_OVERRIDES=["Iwan Jones"];let players=[],view="players";
+const N=s=>String(s??"").trim().toLowerCase().replace(/[^a-z0-9]/g,""),num=v=>{const x=Number(String(v??"").replace(/,/g,""));return Number.isFinite(x)?x:0},fmt=v=>num(v).toLocaleString("en-GB"),dec=v=>num(v).toFixed(2);
+function csv(t){const rows=[];let r=[],c="",q=false;for(let i=0;i<t.length;i++){const x=t[i],n=t[i+1];if(x=='"'){if(q&&n=='"'){c+='"';i++}else q=!q}else if(x==','&&!q){r.push(c);c=""}else if((x=='\n'||x=='\r')&&!q){if(x=='\r'&&n=='\n')i++;r.push(c);if(r.some(v=>v.trim()))rows.push(r);r=[];c=""}else c+=x}r.push(c);if(r.some(v=>v.trim()))rows.push(r);return rows}
+function idx(h,a,start=0){const hh=h.map(N);for(const x of a){const i=hh.indexOf(N(x),start);if(i>=0)return i}return-1}
+function balls(v){const s=String(v??"").trim();if(!s)return 0;const p=s.split(".");return num(p[0])*6+num(p[1]||0)}
+function overs(b){return `${Math.floor(b/6)}.${b%6}`}
+function schema(h){
+  const O=idx(h,["O","Overs"]);
+  const normalisedHeaders=h.map(N);
+  const av=h.map((x,i)=>["ave","average"].includes(N(x))?i:-1).filter(i=>i>=0);
+  const find=(aliases,start=0)=>idx(h,aliases,start);
+
+  let keeper=find([
+    "Full Time Wicketkeeper","Full-time Wicketkeeper","Full Time Wicket Keeper",
+    "Full-time Wicket Keeper","Full Time Keeper","Full-time Keeper",
+    "Full Time WK","Full-time WK","Wicketkeeper","Wicket Keeper",
+    "Wicketkeeper?","Wicket Keeper?","Keeper","WK","WK?"
+  ]);
+
+  // Fallback: recognise any heading containing keeper/wicketkeeper or a standalone WK.
+  if(keeper<0){
+    keeper=normalisedHeaders.findIndex(x=>
+      x==="wk" ||
+      x.includes("wicketkeeper") ||
+      x.includes("wicketkeeper") ||
+      (x.includes("keeper")&&x.includes("full")) ||
+      (x.includes("wicket")&&x.includes("keeper"))
+    );
+  }
+
+  return{
+    p:find(["Player Name","Player","Name"]),
+    no:find(["Playing Number","Player Number","Number","No.","Cap Number"]),
+    d:find(["Debut Year","Debut","First Year"]),
+    m:find(["MT","Matches"]),
+    i:find(["In","Innings"]),
+    noo:find(["NO","Not Outs"]),
+    r:find(["Runs"]),
+    f:find(["50's","50s","Fifties"]),
+    h:find(["100's","100s","Hundreds"]),
+    ba:find(["Bat Ave","Batting Average","Bat Average"])>=0?find(["Bat Ave","Batting Average","Bat Average"]):(av.find(x=>x<O)??-1),
+    hs:find(["HS","High Score"]),
+    o:O,
+    md:find(["Maidens"])>=0?find(["Maidens"]):normalisedHeaders.indexOf("m",O+1),
+    con:find(["Runs Conceded","Conceded"])>=0?find(["Runs Conceded","Conceded"]):normalisedHeaders.indexOf("r",O+1),
+    w:find(["W","Wickets"],Math.max(0,O+1)),
+    e:find(["ECON","Economy","Econ"]),
+    bav:find(["Bowl Ave","Bowling Average","Bowl Average"])>=0?find(["Bowl Ave","Bowling Average","Bowl Average"]):(av.filter(x=>x>O).pop()??-1),
+    catches:find(["Catches","Catch","Ct","C"]),
+    stumpings:find(["Stumpings","Stumping","St","Sts"]),
+    batHand:find(["Batting Hand","Bat Hand","Batting","Bats","Bat Style","Batting Style","Right or Left Hand Bat"]),
+    bowlHand:find(["Bowling Hand","Bowl Hand","Bowling Style","Bowl Style","Right or Left Hand Bowl"]),
+    keeper
+  }
+}
+function val(r,i){return i>=0?(r[i]??""):""}
+function keeperYes(v){
+  const raw=String(v??"").trim();
+  const s=N(raw);
+  if(!s)return false;
+  const exact=[
+    "yes","y","true","1","x","wk","keeper","wicketkeeper",
+    "fulltime","fulltimekeeper","fulltimewicketkeeper",
+    "recognisedkeeper","recognizedkeeper"
+  ];
+  return exact.includes(s) ||
+    s.includes("fulltime") ||
+    s.includes("wicketkeeper") ||
+    s.includes("wicketkeeper") ||
+    s==="yeskeeper";
+}
+function displayHand(v){
+  const s=String(v??"").trim();
+  if(!s)return "—";
+  const n=N(s);
+  if(["r","rh","right","righthand","righthanded","rightarm"].includes(n))return "Right-handed";
+  if(["l","lh","left","lefthand","lefthanded","leftarm"].includes(n))return "Left-handed";
+  return s;
+}
+function displayBowlingArm(v){
+  const s=String(v??"").trim();
+  if(!s)return "—";
+  const n=N(s);
+  if(n.startsWith("r")||n.includes("right"))return "Right-arm";
+  if(n.startsWith("l")||n.includes("left"))return "Left-arm";
+  return s.replace(/medium|fast|spin|seam|pace/gi,"").replace(/\s+/g," ").trim()||"—";
+}
+function map(rows){
+  const s=schema(rows[0]);
+  return rows.slice(1).filter(r=>String(val(r,s.p)).trim()).map(r=>{
+    const b=balls(val(r,s.o));
+    return{
+      name:String(val(r,s.p)).trim(),
+      number:String(val(r,s.no)).trim(),
+      debut:String(val(r,s.d)).trim(),
+      matches:num(val(r,s.m)),
+      innings:num(val(r,s.i)),
+      notOuts:num(val(r,s.noo)),
+      runs:num(val(r,s.r)),
+      fifties:num(val(r,s.f)),
+      hundreds:num(val(r,s.h)),
+      batAverage:num(val(r,s.ba)),
+      highScore:String(val(r,s.hs)).trim(),
+      balls:b,
+      overs:overs(b),
+      maidens:num(val(r,s.md)),
+      conceded:num(val(r,s.con)),
+      wickets:num(val(r,s.w)),
+      economy:num(val(r,s.e)),
+      bowlAverage:num(val(r,s.bav)),
+      catches:num(val(r,s.catches)),
+      stumpings:num(val(r,s.stumpings)),
+      battingHand:displayHand(val(r,s.batHand)),
+      bowlingHand:displayBowlingArm(val(r,s.bowlHand)),
+      fullTimeKeeper:keeperYes(val(r,s.keeper))||KEEPER_OVERRIDES.some(name=>N(name)===N(String(val(r,s.p)).trim()))
+    }
+  })
+}
+async function load(){try{const r=await fetch(CSV_URL+(CSV_URL.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});players=map(csv(await r.text()));pc.textContent=fmt(players.length);mc.textContent=fmt(players.reduce((a,p)=>a+p.matches,0));rc.textContent=fmt(players.reduce((a,p)=>a+p.runs,0));wc.textContent=fmt(players.reduce((a,p)=>a+p.wickets,0));const recognisedKeepers=players.filter(p=>p.fullTimeKeeper).map(p=>p.name);
+status.textContent=`Latest Google Sheets data loaded · ${recognisedKeepers.length} full-time wicketkeeper${recognisedKeepers.length===1?"":"s"} recognised${recognisedKeepers.length?": "+recognisedKeepers.join(", "):""}`;
+render()}catch(e){status.textContent="Could not load the published Google Sheet."}}
+const cfg={
+players:["Player Directory",["Player","No.","Debut","Matches","Runs","Wickets"],(a,b)=>a.name.localeCompare(b.name),p=>[p.number||"—",p.debut||"—",p.matches,fmt(p.runs),p.wickets]],
+batting:["Batting Records",["Player","No.","Matches","Runs","Average","50s","100s","High Score"],(a,b)=>b.runs-a.runs,p=>[p.number||"—",p.matches,fmt(p.runs),dec(p.batAverage),p.fifties,p.hundreds,p.highScore||"—"]],
+bowling:["Bowling Records",["Player","No.","Overs","Wickets","Average","Economy","Maidens"],(a,b)=>b.wickets-a.wickets,p=>[p.number||"—",p.overs,p.wickets,p.wickets?dec(p.bowlAverage):"—",p.balls?dec(p.economy):"—",p.maidens]],
+fielding:["Fielding Records",["Player","No.","Matches","Catches","Stumpings","Total Dismissals","Full-time WK"],(a,b)=>(b.catches+b.stumpings)-(a.catches+a.stumpings)||b.catches-a.catches,p=>[p.number||"—",p.matches,p.catches,p.stumpings,p.catches+p.stumpings,p.fullTimeKeeper?"Yes":"No"]],
+numbers:["Player Numbers",["Player","Playing Number","Debut","Matches","Runs","Wickets"],(a,b)=>{const an=num(a.number)||999999,bn=num(b.number)||999999;return an-bn||a.name.localeCompare(b.name)},p=>[p.number||"—",p.debut||"—",p.matches,fmt(p.runs),p.wickets]],
+appearances:["Appearance Records",["Player","No.","Debut","Matches","Runs","Wickets"],(a,b)=>b.matches-a.matches,p=>[p.number||"—",p.debut||"—",p.matches,fmt(p.runs),p.wickets]]
+};
+function rec(label,p,v){return `<div class="record"><small>${label}</small><b>${p?.name||"—"}</b><strong>${v}</strong></div>`}
+function renderRecords(){
+  if(!["batting","bowling","fielding","appearances"].includes(view)){
+    records.classList.add("hidden");return;
+  }
+  records.classList.remove("hidden");
+  let c=[];
+  if(view=="batting"){
+    const r=[...players].sort((a,b)=>b.runs-a.runs)[0],
+          h=[...players].sort((a,b)=>b.hundreds-a.hundreds)[0],
+          a=[...players].filter(p=>p.innings>=30).sort((a,b)=>b.batAverage-a.batAverage)[0];
+    c=[rec("Most runs",r,fmt(r?.runs)),rec("Most centuries",h,h?.hundreds||0),rec("Best average · 30+ innings",a,dec(a?.batAverage))];
+  }else if(view=="bowling"){
+    const w=[...players].sort((a,b)=>b.wickets-a.wickets)[0],
+          a=[...players].filter(p=>p.wickets>=50&&p.bowlAverage>0).sort((a,b)=>a.bowlAverage-b.bowlAverage)[0],
+          e=[...players].filter(p=>p.wickets>=50&&p.economy>0).sort((a,b)=>a.economy-b.economy)[0];
+    c=[rec("Most wickets",w,fmt(w?.wickets)),rec("Best average · 50+ wickets",a,dec(a?.bowlAverage)),rec("Best economy · 50+ wickets",e,dec(e?.economy))];
+  }else if(view=="fielding"){
+    const ct=[...players].sort((a,b)=>b.catches-a.catches)[0],
+          st=[...players].sort((a,b)=>b.stumpings-a.stumpings)[0],
+          dis=[...players].sort((a,b)=>(b.catches+b.stumpings)-(a.catches+a.stumpings))[0];
+    c=[rec("Most catches",ct,fmt(ct?.catches)),rec("Most stumpings",st,fmt(st?.stumpings)),rec("Most fielding dismissals",dis,fmt((dis?.catches||0)+(dis?.stumpings||0)))];
+  }else{
+    const m=[...players].sort((a,b)=>b.matches-a.matches)[0],
+          i=[...players].sort((a,b)=>b.innings-a.innings)[0],
+          n=[...players].sort((a,b)=>b.notOuts-a.notOuts)[0];
+    c=[rec("Most appearances",m,fmt(m?.matches)),rec("Most innings",i,fmt(i?.innings)),rec("Most not outs",n,fmt(n?.notOuts))];
+  }
+  recordCards.innerHTML=c.join("");
+}
+function data(){const q=search.value.trim().toLowerCase();return players.filter(p=>(!q||p.name.toLowerCase().includes(q)||String(p.number)==q||String(p.debut).includes(q))&&(view!="bowling"||p.wickets>0)&&(view!="fielding"||p.catches>0||p.stumpings>0))}
+function renderStd(){const c=cfg[view],d=data().sort(c[2]);title.textContent=c[0];count.textContent=`${d.length} results`;thead.innerHTML="<tr>"+c[1].map(x=>`<th>${x}</th>`).join("")+"</tr>";tbody.innerHTML=d.map((p,i)=>`<tr onclick='openProfile(${JSON.stringify(p.name)})'><td><span class="rank">${i+1}</span><span class="name">${p.name}</span><span class="meta">${p.number?`Player #${p.number}`:""}${p.debut?` · Debut ${p.debut}`:""}</span></td>${c[3](p).map(v=>`<td>${v}</td>`).join("")}</tr>`).join("");renderRecords()}
+function milestoneCard(label,list,valueKey){
+  return `<div class="milestone-card"><h3>${label}</h3><div class="milestone-count">${list.length} player${list.length===1?"":"s"}</div><div class="milestone-list">${list.map(p=>`<button class="milestone-player" onclick='openProfile(${JSON.stringify(p.name)})'>${p.name} · ${fmt(p[valueKey])}</button>`).join("")||"<span>No players yet</span>"}</div></div>`;
+}
+function exclusiveMilestone(levels,key,level){
+  const i=levels.indexOf(level),next=levels[i+1];
+  return [...players].filter(p=>p[key]>=level&&(!next||p[key]<next)).sort((a,b)=>b[key]-a[key]);
+}
+function nextLevel(value,levels){
+  return levels.find(level=>level>value)||null;
+}
+function renderMilestones(){
+  const maxRuns=Math.max(...players.map(p=>p.runs),0);
+  const maxWickets=Math.max(...players.map(p=>p.wickets),0);
+  const batting=[];
+  for(let x=500;x<=Math.ceil(maxRuns/500)*500;x+=500)batting.push(x);
+  const bowling=[];
+  for(let x=25;x<=Math.ceil(maxWickets/25)*25;x+=25)bowling.push(x);
+  const catching=[25,50,100,125,150,200,250,300];
+
+  batMilestones.innerHTML=batting.map(x=>milestoneCard(`${fmt(x)} Run Club`,exclusiveMilestone(batting,"runs",x),"runs")).join("");
+  bowlMilestones.innerHTML=bowling.map(x=>milestoneCard(`${fmt(x)} Wicket Club`,exclusiveMilestone(bowling,"wickets",x),"wickets")).join("");
+  catchMilestones.innerHTML=catching.map(x=>milestoneCard(`${fmt(x)} Catch Club`,exclusiveMilestone(catching,"catches",x),"catches")).join("");
+
+  const near=[];
+  players.forEach(p=>{
+    const nr=nextLevel(p.runs,batting);
+    if(nr&&nr-p.runs<=100)near.push({name:p.name,label:`${nr-p.runs} runs from ${fmt(nr)}`,type:"Batting"});
+    const nw=nextLevel(p.wickets,bowling);
+    if(nw&&nw-p.wickets<=10)near.push({name:p.name,label:`${nw-p.wickets} wickets from ${fmt(nw)}`,type:"Bowling"});
+    const nc=nextLevel(p.catches,catching);
+    if(nc&&nc-p.catches<=10)near.push({name:p.name,label:`${nc-p.catches} catches from ${fmt(nc)}`,type:"Fielding"});
+  });
+  near.sort((a,b)=>{
+    const na=Number(a.label.split(" ")[0]),nb=Number(b.label.split(" ")[0]);
+    return na-nb||a.name.localeCompare(b.name);
+  });
+  nearMilestones.innerHTML=near.length?near.map(x=>`<div class="near-card" onclick='openProfile(${JSON.stringify(x.name)})'><b>${x.name}</b><span>${x.type}: ${x.label}</span></div>`).join(""):"<div>No players currently within the highlighted range.</div>";
+}
+function keeperVictimsPerMatch(p){
+  return p.matches>0?(p.catches+p.stumpings)/p.matches:0;
+}
+function qualifiedBatters(pool){
+  const established=pool.filter(p=>!p.fullTimeKeeper&&p.innings>=30&&p.batAverage>0);
+  const developing=pool.filter(p=>!p.fullTimeKeeper&&p.innings>=10&&p.batAverage>0);
+  const everyone=pool.filter(p=>!p.fullTimeKeeper&&p.innings>0&&p.batAverage>0);
+
+  const sorter=(a,b)=>
+    b.batAverage-a.batAverage ||
+    b.runs-a.runs ||
+    b.innings-a.innings;
+
+  return [...established.sort(sorter),...developing.sort(sorter),...everyone.sort(sorter)]
+    .filter((p,i,arr)=>arr.findIndex(x=>x.name===p.name)===i);
+}
+function qualifiedBowlers(pool){
+  const established=pool.filter(p=>!p.fullTimeKeeper&&p.wickets>=25&&p.bowlAverage>0);
+  const developing=pool.filter(p=>!p.fullTimeKeeper&&p.wickets>=10&&p.bowlAverage>0);
+  const everyone=pool.filter(p=>!p.fullTimeKeeper&&p.wickets>0&&p.bowlAverage>0);
+
+  const sorter=(a,b)=>
+    a.bowlAverage-b.bowlAverage ||
+    b.wickets-a.wickets ||
+    a.economy-b.economy;
+
+  return [...established.sort(sorter),...developing.sort(sorter),...everyone.sort(sorter)]
+    .filter((p,i,arr)=>arr.findIndex(x=>x.name===p.name)===i);
+}
+function chooseKeeper(pool){
+  return pool.filter(p=>p.fullTimeKeeper)
+    .sort((a,b)=>
+      keeperVictimsPerMatch(b)-keeperVictimsPerMatch(a) ||
+      (b.catches+b.stumpings)-(a.catches+a.stumpings) ||
+      b.matches-a.matches
+    )[0]||null;
+}
+function buildAverageTeam(pool){
+  const selected=[];
+  const keeper=chooseKeeper(pool);
+  if(keeper)selected.push({...keeper,role:"Wicketkeeper"});
+
+  const availableAfterKeeper=pool.filter(p=>!selected.some(s=>s.name===p.name));
+
+  qualifiedBatters(availableAfterKeeper)
+    .filter(p=>!selected.some(s=>s.name===p.name))
+    .slice(0,5)
+    .forEach(p=>selected.push({...p,role:"Batter"}));
+
+  qualifiedBowlers(availableAfterKeeper)
+    .filter(p=>!selected.some(s=>s.name===p.name))
+    .slice(0,5)
+    .forEach(p=>selected.push({...p,role:"Bowler"}));
+
+  // Fill any gap with the strongest remaining specialist by the relevant average.
+  if(selected.length<11){
+    const remaining=availableAfterKeeper.filter(p=>!selected.some(s=>s.name===p.name));
+    const fallback=remaining.map(p=>{
+      const battingMerit=p.innings>0&&p.batAverage>0?p.batAverage:0;
+      const bowlingMerit=p.wickets>0&&p.bowlAverage>0?40-p.bowlAverage:0;
+      return {...p,fallbackScore:Math.max(battingMerit,bowlingMerit)};
+    }).sort((a,b)=>b.fallbackScore-a.fallbackScore||b.matches-a.matches);
+
+    fallback.slice(0,11-selected.length).forEach(p=>{
+      const role=(p.wickets>=10&&p.bowlAverage>0&&
+        (p.innings<10||p.batAverage<=0||40-p.bowlAverage>p.batAverage))
+        ?"Bowler":"Batter";
+      selected.push({...p,role});
+    });
+  }
+
+  return selected.slice(0,11);
+}
+function generateThreeTeams(){
+  const eligible=players.filter(p=>
+    p.fullTimeKeeper ||
+    p.innings>=10 ||
+    p.wickets>=10 ||
+    p.matches>=20
+  );
+  const teams=[];
+  const used=new Set();
+
+  for(let i=0;i<3;i++){
+    const pool=eligible.filter(p=>!used.has(p.name));
+    const team=buildAverageTeam(pool);
+    team.forEach(p=>used.add(p.name));
+    teams.push(team);
+  }
+  return teams;
+}
+function teamStats(team){
+  const batters=team.filter(p=>p.role==="Batter");
+  const bowlers=team.filter(p=>p.role==="Bowler");
+  const keeper=team.find(p=>p.role==="Wicketkeeper");
+  const batAve=batters.length?batters.reduce((a,p)=>a+p.batAverage,0)/batters.length:0;
+  const bowlAve=bowlers.length?bowlers.reduce((a,p)=>a+p.bowlAverage,0)/bowlers.length:0;
+  return{
+    runs:team.reduce((a,p)=>a+p.runs,0),
+    wickets:team.reduce((a,p)=>a+p.wickets,0),
+    catches:team.reduce((a,p)=>a+p.catches,0),
+    stumpings:team.reduce((a,p)=>a+p.stumpings,0),
+    batAve,
+    bowlAve,
+    keeper,
+    keeperRate:keeper?keeperVictimsPerMatch(keeper):0
+  };
+}
+function renderXI(){
+  const labels=["AI Greatest First XI","AI Greatest Second XI","AI Greatest Third XI"];
+  const teams=generateThreeTeams();
+
+  teamsContainer.innerHTML=teams.map((team,t)=>{
+    const s=teamStats(team);
+    return `<section class="team-block">
+      <div class="team-heading"><h3>${labels[t]}</h3><small>${team.length} players</small></div>
+      <div class="xi-grid">${team.map((p,i)=>{
+        let selectionLine="";
+        if(p.role==="Wicketkeeper"){
+          selectionLine=`${(p.catches+p.stumpings)} victims · ${keeperVictimsPerMatch(p).toFixed(2)} per match`;
+        }else if(p.role==="Batter"){
+          selectionLine=`Batting average ${dec(p.batAverage)} · ${fmt(p.runs)} runs`;
+        }else{
+          selectionLine=`Bowling average ${dec(p.bowlAverage)} · ${p.wickets} wickets`;
+        }
+        return `<div class="xi-card" onclick='openProfile(${JSON.stringify(p.name)})'>
+          <h3>${i+1}. ${p.name}</h3>
+          <div class="xi-role">${p.role}</div>
+          <div>${selectionLine}</div>
+          <div class="xi-note">${p.battingHand!=="—"?`Bat: ${p.battingHand}`:""}${p.bowlingHand!=="—"?`${p.battingHand!=="—"?" · ":""}Bowl: ${p.bowlingHand}`:""}</div>
+        </div>`;
+      }).join("")}</div>
+      <div class="team-summary">
+        ${fmt(s.runs)} combined runs · ${fmt(s.wickets)} combined wickets ·
+        selected batters’ average ${dec(s.batAve)} · selected bowlers’ average ${dec(s.bowlAve)}
+        ${s.keeper?` · Wicketkeeper: ${s.keeper.name} (${s.keeperRate.toFixed(2)} victims per match)`:" · No unused full-time wicketkeeper available"}
+      </div>
+    </section>`;
+  }).join("");
+}
+function render(){standard.classList.toggle("hidden",["milestones","xi"].includes(view));milestones.classList.toggle("hidden",view!="milestones");xi.classList.toggle("hidden",view!="xi");if(view=="milestones")renderMilestones();else if(view=="xi")renderXI();else renderStd()}
+function stat(l,v){return `<div class="stat"><b>${v}</b><span>${l}</span></div>`}
+function openProfile(n){
+  const p=players.find(x=>x.name==n);
+  pname.textContent=p.name;
+  ptags.textContent=`${p.number?`Player #${p.number} · `:""}${p.debut?`Debut ${p.debut} · `:""}${p.fullTimeKeeper?"Full-time wicketkeeper":""}`;
+  pbody.innerHTML=`<div class="profile-grid">
+    <div class="panel"><h3>Batting</h3><div class="stat-grid">
+      ${stat("Runs",fmt(p.runs))}${stat("Average",dec(p.batAverage))}
+      ${stat("Matches",p.matches)}${stat("Innings",p.innings)}
+      ${stat("50s",p.fifties)}${stat("100s",p.hundreds)}
+      ${stat("High score",p.highScore||"—")}${stat("Batting hand",p.battingHand)}
+    </div></div>
+    <div class="panel"><h3>Bowling</h3><div class="stat-grid">
+      ${stat("Wickets",p.wickets)}${stat("Average",p.wickets?dec(p.bowlAverage):"—")}
+      ${stat("Overs",p.overs)}${stat("Economy",p.balls?dec(p.economy):"—")}
+      ${stat("Maidens",p.maidens)}${stat("Bowling hand",p.bowlingHand)}
+    </div></div>
+    <div class="panel"><h3>Fielding</h3><div class="stat-grid">
+      ${stat("Catches",p.catches)}${stat("Stumpings",p.stumpings)}
+      ${stat("Total dismissals",p.catches+p.stumpings)}${stat("Full-time keeper",p.fullTimeKeeper?"Yes":"No")}
+    </div></div>
+  </div>`;
+  modal.classList.add("open");
+}
+function closeProfile(){modal.classList.remove("open")}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");view=b.dataset.view;render()});search.addEventListener("input",()=>{if(!["milestones","xi"].includes(view))render()});load();
+</script>
+</body>
+</html>
