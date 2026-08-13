@@ -1,2 +1,0 @@
-const SOURCE="https://docs.google.com/spreadsheets/d/e/2PACX-1vRVw2p4gIUekrmVSfGgie2v7Np2QvHTBZcrUEldUn53YwTdgr-VTz6S9n8kRcv2gQ9P93fyN6XogqVE/pub?output=csv";
-export async function GET(){try{const response=await fetch(SOURCE,{headers:{accept:"text/csv"}});if(!response.ok)return new Response("Unable to load club statistics",{status:502});return new Response(await response.text(),{headers:{"content-type":"text/csv; charset=utf-8","cache-control":"public, max-age=300, s-maxage=900"}})}catch{return new Response("Unable to load club statistics",{status:502})}}
